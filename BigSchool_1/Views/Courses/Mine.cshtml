@@ -30,12 +30,46 @@
                             @course.Category.Name
                         </span>
                     </div>
-                    <div class="action" style="padding-left:70px">
-                        <a href="@Url.Action("Edit","Courses",new { id = course.Id})">Edit</a> |
-                        <a href="">Delete</a>
+                    <div style="padding-left: 70px; padding-top: 5px;">
+                        <a class="btn btn-primary" href="@Url.Action("Edit","Courses",new { id = course.Id})">Edit</a> |
+                        <a  data-course-id="@course.Id" class="btn btn-danger js-cancel-course">Delete</a>
                     </div>
                 </li>
             }
         </ul>
     </div>
 </div>
+
+@section scripts{ 
+    <script>
+        $(document).ready(function () {
+            $(".js-cancel-course").click(function (e) {
+                e.preventDefault();
+                var link = $(e.target);
+                bootbox.confirm({
+                    size: "small",
+                    message: "Are you sure to delete?",
+                    callback: function () {
+                        $.ajax({
+
+                            url: "/Courses/deleteAjax/" + link.attr("data-course-id"),
+                            type:"POST"
+                        })
+                            .done(function () {
+                                link.parents("li").fadeOut(function () {
+                                    $(this).remove();
+                                });
+                            })
+                            .fail(function () {
+                                alert("something fail...")
+                            });       
+                    }
+                });
+            });
+        });
+    </script>
+}
+    
+
+
+

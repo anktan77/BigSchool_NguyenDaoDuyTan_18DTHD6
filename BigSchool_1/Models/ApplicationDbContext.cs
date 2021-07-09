@@ -27,7 +27,10 @@ namespace BigSchool_1.Models
                 .HasRequired(a => a.Course)
                 .WithMany()
                 .WillCascadeOnDelete(false);
+
+
             base.OnModelCreating(modelBuilder);
+            
         }
     }
 }

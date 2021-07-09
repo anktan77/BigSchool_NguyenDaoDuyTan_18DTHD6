@@ -6,14 +6,14 @@ namespace BigSchool_1.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class PopulateCategoryTable : IMigrationMetadata
+    [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
+    public sealed partial class updateTBnew : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(PopulateCategoryTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(updateTBnew));
         
         string IMigrationMetadata.Id
         {
-            get { return "202107011501357_PopulateCategoryTable"; }
+            get { return "202107090844353_updateTBnew"; }
         }
         
         string IMigrationMetadata.Source

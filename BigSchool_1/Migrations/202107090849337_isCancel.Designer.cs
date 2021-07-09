@@ -6,14 +6,14 @@ namespace BigSchool_1.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class CreateTableCourse : IMigrationMetadata
+    [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
+    public sealed partial class isCancel : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateTableCourse));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(isCancel));
         
         string IMigrationMetadata.Id
         {
-            get { return "202107011453339_CreateTableCourse"; }
+            get { return "202107090849337_isCancel"; }
         }
         
         string IMigrationMetadata.Source

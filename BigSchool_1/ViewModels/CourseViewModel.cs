@@ -10,6 +10,7 @@ namespace BigSchool_1.ViewModels
 {
     public class CourseViewModel
     {
+        public int Id { get; set; }
         [Required]
         public string Place { get; set; }
 
@@ -24,6 +25,11 @@ namespace BigSchool_1.ViewModels
         [Required]
         public int Category { get; set; }
         public IEnumerable<Category> categories { get; set; }
+
+        public string Heading { get; set; }
+        public string Action {
+            get { return (Id != 0) ? "Update" : "Create"; }
+        }
 
         public DateTime GetDateTime()
         {

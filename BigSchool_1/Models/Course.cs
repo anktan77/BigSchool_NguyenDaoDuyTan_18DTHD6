@@ -11,7 +11,9 @@ namespace BigSchool_1.Models
     {
         [Key]
         public int Id { get; set; }
-        
+
+        public bool IsCanceled { get; set; }
+
         [Required]
         [StringLength(255)]
         public string Place { get; set; }

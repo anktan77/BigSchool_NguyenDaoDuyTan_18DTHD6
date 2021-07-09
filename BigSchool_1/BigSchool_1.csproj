@@ -178,6 +178,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\CoursesController.cs" />
     <Compile Include="Controllers\AttendancesController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -186,33 +187,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202107011444230_InitialModel.cs" />
-    <Compile Include="Migrations\202107011444230_InitialModel.Designer.cs">
-      <DependentUpon>202107011444230_InitialModel.cs</DependentUpon>
+    <Compile Include="Migrations\202107090839453_addTable.cs" />
+    <Compile Include="Migrations\202107090839453_addTable.Designer.cs">
+      <DependentUpon>202107090839453_addTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202107011453339_CreateTableCourse.cs" />
-    <Compile Include="Migrations\202107011453339_CreateTableCourse.Designer.cs">
-      <DependentUpon>202107011453339_CreateTableCourse.cs</DependentUpon>
+    <Compile Include="Migrations\202107090844353_updateTBnew.cs" />
+    <Compile Include="Migrations\202107090844353_updateTBnew.Designer.cs">
+      <DependentUpon>202107090844353_updateTBnew.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202107011501357_PopulateCategoryTable.cs" />
-    <Compile Include="Migrations\202107011501357_PopulateCategoryTable.Designer.cs">
-      <DependentUpon>202107011501357_PopulateCategoryTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202107011701255_AddNameColumnToApplicationUser.cs" />
-    <Compile Include="Migrations\202107011701255_AddNameColumnToApplicationUser.Designer.cs">
-      <DependentUpon>202107011701255_AddNameColumnToApplicationUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202107021944033_AddAttendance.cs" />
-    <Compile Include="Migrations\202107021944033_AddAttendance.Designer.cs">
-      <DependentUpon>202107021944033_AddAttendance.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202107080221274_Add_LectureName.cs" />
-    <Compile Include="Migrations\202107080221274_Add_LectureName.Designer.cs">
-      <DependentUpon>202107080221274_Add_LectureName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202107080319598_UPdate_Course.cs" />
-    <Compile Include="Migrations\202107080319598_UPdate_Course.Designer.cs">
-      <DependentUpon>202107080319598_UPdate_Course.cs</DependentUpon>
+    <Compile Include="Migrations\202107090849337_isCancel.cs" />
+    <Compile Include="Migrations\202107090849337_isCancel.Designer.cs">
+      <DependentUpon>202107090849337_isCancel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -237,6 +222,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootbox.all.js" />
+    <Content Include="Scripts\bootbox.all.min.js" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.locales.js" />
+    <Content Include="Scripts\bootbox.locales.min.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -306,26 +297,14 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202107011444230_InitialModel.resx">
-      <DependentUpon>202107011444230_InitialModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202107090839453_addTable.resx">
+      <DependentUpon>202107090839453_addTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202107011453339_CreateTableCourse.resx">
-      <DependentUpon>202107011453339_CreateTableCourse.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202107090844353_updateTBnew.resx">
+      <DependentUpon>202107090844353_updateTBnew.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202107011501357_PopulateCategoryTable.resx">
-      <DependentUpon>202107011501357_PopulateCategoryTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202107011701255_AddNameColumnToApplicationUser.resx">
-      <DependentUpon>202107011701255_AddNameColumnToApplicationUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202107021944033_AddAttendance.resx">
-      <DependentUpon>202107021944033_AddAttendance.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202107080221274_Add_LectureName.resx">
-      <DependentUpon>202107080221274_Add_LectureName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202107080319598_UPdate_Course.resx">
-      <DependentUpon>202107080319598_UPdate_Course.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202107090849337_isCancel.resx">
+      <DependentUpon>202107090849337_isCancel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
