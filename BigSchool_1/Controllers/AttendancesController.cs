@@ -1,4 +1,5 @@
-﻿using BigSchool_1.Models;
+﻿using BigSchool_1.DTOs;
+using BigSchool_1.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -18,22 +19,41 @@ namespace BigSchool_1.Controllers
             _dbContext = new ApplicationDbContext();
         }
         [HttpPost]
-        public IHttpActionResult Attend(Course attendanceDto)
+        public IHttpActionResult Attend(AttendanceDto attendanceDto)
         {
             var userId = User.Identity.GetUserId();
-            if (_dbContext.attendances.Any(a=>a.AttdendeeId == userId && a.CourseId == attendanceDto.Id))
+            if (_dbContext.attendances.Any(a => a.AttdendeeId == userId && a.CourseId == attendanceDto.CourseID))
             {
-                return BadRequest("The Attendance already exist");
+                return BadRequest("The Attendance already exists!");
             }
+
             var attendance = new Attendance_1
             {
-                CourseId = attendanceDto.Id,
-                AttdendeeId = userId,
-                
+                CourseId = attendanceDto.CourseID,
+                AttdendeeId = userId
             };
+
             _dbContext.attendances.Add(attendance);
             _dbContext.SaveChanges();
+
             return Ok();
+        }
+
+        [HttpDelete]
+        public IHttpActionResult DeleteAttendance(int id)
+        {
+            var userId = User.Identity.GetUserId();
+
+            var attendance = _dbContext.attendances.SingleOrDefault(a => a.AttdendeeId == userId && a.CourseId == id);
+            if (attendance == null)
+            {
+                return NotFound();
+            }
+
+            _dbContext.attendances.Remove(attendance);
+            _dbContext.SaveChanges();
+
+            return Ok(attendance);
         }
     }
 }

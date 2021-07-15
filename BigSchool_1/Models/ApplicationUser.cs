@@ -15,10 +15,16 @@ namespace BigSchool_1.Models
         [Required]
         [StringLength(255)]
         public string Name { get; set; }
-      
-
         public ICollection<Course> courses { get; set; }
         public ICollection<Attendance_1> attendance_1s { get; set; }
+        public ICollection<Following> followers { get; set; }
+        public ICollection<Following> followees { get; set; }
+
+        public ApplicationUser()
+        {
+            followers = new Collection<Following>();
+            followees = new Collection<Following>();
+        }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

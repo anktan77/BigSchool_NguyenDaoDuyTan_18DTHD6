@@ -28,5 +28,9 @@ namespace BigSchool_1.Models
         [Required]
         public int IdCategory { get; set; }
         public Category Category { get; set; }
+        public string UserName { get; set; }
+        public bool isLogin { get; set; }
+        public bool isShowGoing { get; set; }
+        public bool isShowFollow { get; set; }
     }
 }

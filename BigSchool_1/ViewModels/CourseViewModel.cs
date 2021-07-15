@@ -39,5 +39,7 @@ namespace BigSchool_1.ViewModels
             DateTime mainTime = DateTime.Parse(format);
             return mainTime;
         }
+
+      
     }
 }

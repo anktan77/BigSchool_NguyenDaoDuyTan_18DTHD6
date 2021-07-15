@@ -58,6 +58,7 @@ namespace BigSchool_1.Controllers
         [Authorize]
         public ActionResult Attending()
         {
+           
             var userID = User.Identity.GetUserId();
             var course = _dbContext.attendances
                 .Where(a => a.AttdendeeId == userID)
@@ -65,8 +66,33 @@ namespace BigSchool_1.Controllers
                 .Include(l => l.ApplicationUser)
                 .Include(l => l.Category)
                 .ToList();
+           
+            foreach (Course item in course)
+            {
+                ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(item.IdLecturer);
+                item.UserName = user.Name;
 
-            
+                if (userID != null)
+                {
+                    var find = _dbContext.attendances.Where(a => a.CourseId == item.Id && a.AttdendeeId == userID).FirstOrDefault();
+                    if (find == null)
+                    {
+                        item.isShowGoing = true;
+                    }
+
+                    var findFollow = _dbContext.followings.FirstOrDefault(p => p.FolloweeId == userID && p.FollowerId == item.IdLecturer);
+                    if (findFollow == null)
+                    {
+                        item.isShowFollow = true;
+                    }
+                }
+            }
+
+            var viewModel = new CoursesViewModel
+            {
+                UpcomingCourse = course,
+                ShowAction = User.Identity.IsAuthenticated
+            };
 
             return View(course);
         }
@@ -131,5 +157,55 @@ namespace BigSchool_1.Controllers
             return Json(new { status = "Success" });
         }
 
+
+        public ActionResult LectureIamGoing()
+        {
+            var userId = User.Identity.GetUserId();
+
+            var listFollwee = _dbContext.followings.Where(p => p.FollowerId == userId).ToList();
+
+            var listAttendances = _dbContext.attendances.Where(p => p.AttdendeeId == userId).ToList();
+
+            var totalCourses = new List<Course>();
+            foreach (var lecturer in listFollwee)
+            {
+                var courses = _dbContext.courses
+                .Where(a => a.IdLecturer == lecturer.FolloweeId && a.DateTime >= DateTime.Now)
+                .Include(l => l.ApplicationUser)
+                .Include(c => c.Category)
+                .ToList();
+
+                foreach (Course item in courses)
+                {
+                    ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(item.IdLecturer);
+                    item.UserName = user.Name;
+
+                    if (userId != null)
+                    {
+                        var find = _dbContext.attendances.Where(a => a.CourseId == item.Id && a.AttdendeeId == userId).FirstOrDefault();
+                        if (find == null)
+                        {
+                            item.isShowGoing = true;
+                        }
+
+                        var findFollow = _dbContext.followings.FirstOrDefault(p => p.FolloweeId == userId && p.FollowerId == item.IdLecturer);
+                        if (findFollow == null)
+                        {
+                            item.isShowFollow = true;
+                        }
+                    }
+                    totalCourses.Add(item);
+                }
+
+            }
+
+            var viewModel = new CoursesViewModel
+            {
+                UpcomingCourse = totalCourses,
+                ShowAction = User.Identity.IsAuthenticated
+            };
+
+            return View(viewModel);
+        }
     }
 }

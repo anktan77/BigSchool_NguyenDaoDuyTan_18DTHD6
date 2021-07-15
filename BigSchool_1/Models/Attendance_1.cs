@@ -9,11 +9,11 @@ namespace BigSchool_1.Models
 {
     public class Attendance_1
     {
-        public Course Course { get; set; }
+       
         [Key]
         [Column(Order = 1)]
         public int CourseId { get; set; }
-
+        public Course Course { get; set; }
 
         [Key]
         [Column(Order = 2)]

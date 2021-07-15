@@ -32,7 +32,7 @@
                     </div>
                     <div style="padding-left: 70px; padding-top: 5px;">
                         <a class="btn btn-primary" href="@Url.Action("Edit","Courses",new { id = course.Id})">Edit</a> |
-                        <a  data-course-id="@course.Id" class="btn btn-danger js-cancel-course">Delete</a>
+                        <a data-course-id="@course.Id" class="btn btn-danger js-cancel-course">Delete</a>
                     </div>
                 </li>
             }
@@ -40,36 +40,59 @@
     </div>
 </div>
 
-@section scripts{ 
+
+@*@section scripts {
     <script>
         $(document).ready(function () {
             $(".js-cancel-course").click(function (e) {
                 e.preventDefault();
                 var link = $(e.target);
-                bootbox.confirm({
-                    size: "small",
-                    message: "Are you sure to delete?",
-                    callback: function () {
-                        $.ajax({
-
-                            url: "/Courses/deleteAjax/" + link.attr("data-course-id"),
-                            type:"POST"
-                        })
+                bootbox.confirm("Are you sure to cancel?",
+                    function () {
+                        $.ajax({ url: "/api/courses/" + link.attr("date-course-id"), method: "DELETE" })
                             .done(function () {
                                 link.parents("li").fadeOut(function () {
                                     $(this).remove();
                                 });
                             })
                             .fail(function () {
-                                alert("something fail...")
-                            });       
-                    }
-                });
+                                alert("Something failed!");
+                            });
+                    });
             });
         });
     </script>
-}
-    
+    }*@
+    @section scripts{
+            <script>
+                $(document).ready(function () {
+                    $(".js-cancel-course").click(function (e) {
+                        e.preventDefault();
+                        var link = $(e.target);
+                        bootbox.confirm({
+                            size: "small",
+                            message: "Are you sure to delete?",
+                            callback: function () {
+                                $.ajax({
+
+                                    url: "/Courses/deleteAjax/" + link.attr("data-course-id"),
+                                    type:"POST"
+                                })
+                                    .done(function () {
+                                        link.parents("li").fadeOut(function () {
+                                            $(this).remove();
+                                        });
+                                    })
+                                    .fail(function () {
+                                        alert("something fail...")
+                                    });
+                            }
+                        });
+                    });
+                });
+            </script>
+        }
+
 
 
 
