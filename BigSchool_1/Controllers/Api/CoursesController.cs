@@ -44,16 +44,17 @@ namespace BigSchool_1.Controllers.Api
         {
             var userId = User.Identity.GetUserId();
 
-            var attendance = _dbContext.attendances.SingleOrDefault(a => a.AttdendeeId == userId && a.CourseId == id);
-            if (attendance == null)
+            var courses = _dbContext.courses.Single(c => c.Id == id && c.IdLecturer == userId);
+
+            if (courses.IsCanceled)
             {
                 return NotFound();
             }
 
-            _dbContext.attendances.Remove(attendance);
+            courses.IsCanceled = true;
             _dbContext.SaveChanges();
 
-            return Ok(attendance);
+            return Ok();
         }
     }
 }

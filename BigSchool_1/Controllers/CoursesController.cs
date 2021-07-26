@@ -79,7 +79,7 @@ namespace BigSchool_1.Controllers
                     {
                         item.isShowGoing = true;
                     }
-
+                    
                     var findFollow = _dbContext.followings.FirstOrDefault(p => p.FolloweeId == userID && p.FollowerId == item.IdLecturer);
                     if (findFollow == null)
                     {
