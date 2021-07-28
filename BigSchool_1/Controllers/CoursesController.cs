@@ -177,8 +177,8 @@ namespace BigSchool_1.Controllers
 
                 foreach (Course item in courses)
                 {
-                    ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(item.IdLecturer);
-                    item.UserName = user.Name;
+                    //ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(item.IdLecturer);
+                    //item.UserName = user.Name;
 
                     if (userId != null)
                     {
