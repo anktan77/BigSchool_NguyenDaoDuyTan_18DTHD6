@@ -10,47 +10,52 @@
         <ul class="course">
             @foreach (var course in Model)
             {
-                <li>
-                    <div class="date">
-                        <div class="month">
-                            @course.DateTime.ToString("MM")
+                if (course.IsCanceled == false)
+                {
+                    <li>
+                        <div class="date">
+                            <div class="month">
+                                @course.DateTime.ToString("MM")
+                            </div>
+                            <div class="day">
+                                @course.DateTime.ToString("dd")
+                            </div>
                         </div>
-                        <div class="day">
-                            @course.DateTime.ToString("dd")
-                        </div>
-                    </div>
-                    <div class="details">
-                        <span class="lecturer">
-                            @course.ApplicationUser.Name
+                        <div class="details">
+                            <span class="lecturer">
+                                @course.ApplicationUser.Name
+                                @if (course.isLogin)
+                                {
+
+                                    if (course.isShowFollow)
+                                    {
+                                        <button data-user-id="@course.IdLecturer" class="btn btn-link btn-sm js-tongle-follow">Follow</button>
+                                    }
+                                    else
+                                    {
+                                        <button data-user-id="@course.IdLecturer" class="btn btn-success btn-sm js-tongle-follow">Following</button>
+                                    }
+
+                                }
+                            </span>
+                            <br />
+                            <span class="category">
+                                @course.Category.Name
+                            </span>
                             @if (course.isLogin)
                             {
-                                if (course.isShowFollow)
+                                if (course.isShowGoing)
                                 {
-                                    <button data-user-id="@course.IdLecturer" class="btn btn-link btn-sm js-tongle-follow">Follow</button>
+                                    <button data-course-id="@course.Id" class="btn btn-default btn-sm js-tongle-attendance">Going?</button>
                                 }
                                 else
                                 {
-                                    <button data-user-id="@course.IdLecturer" class="btn btn-success btn-sm js-tongle-follow">Following</button>
+                                    <button data-course-id="@course.Id" class="btn btn-info btn-sm js-tongle-attendance">Going</button>
                                 }
                             }
-                        </span>
-                        <br />
-                        <span class="category">
-                            @course.Category.Name
-                        </span>
-                        @if (course.isLogin)
-                        {
-                            if (course.isShowGoing)
-                            {
-                                <button data-course-id="@course.Id" class="btn btn-default btn-sm js-tongle-attendance">Going?</button>
-                            }
-                            else
-                            {
-                                <button data-course-id="@course.Id" class="btn btn-info btn-sm js-tongle-attendance">Going</button>
-                            }
-                        }
-                    </div>
-                </li>
+                        </div>
+                    </li>
+                }
             }
         </ul>
     </div>
@@ -101,7 +106,7 @@
                                 .text("Following");
                         })
                         .fail(function () {
-                            alert("Something failed!");
+                            alert("Not Follow Yourself");
                         });
                 } else {
                     $.ajax({

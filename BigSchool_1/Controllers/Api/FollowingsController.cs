@@ -31,16 +31,21 @@ namespace BigSchool_1.Controllers.Api
             {
                 return BadRequest("Following already exists!");
             }
-            
-            var following = new Following
+            if(userId == followingDto.FolloweeId){
+                return BadRequest("Not Follow yourself!");
+            }
+            else
             {
-                FollowerId = userId,
-                FolloweeId = followingDto.FolloweeId
-            };
-
-            db.followings.Add(following);
-            db.SaveChanges();
-            return Ok();
+                var following = new Following
+                {
+                    FollowerId = userId,
+                    FolloweeId = followingDto.FolloweeId
+                };
+                db.followings.Add(following);
+                db.SaveChanges();
+                return Ok();
+            }
+                  
         }
 
         [HttpDelete]

@@ -10,30 +10,32 @@
 <ul class="course">
     @foreach (var course in Model.UpcomingCourse)
     {
-        <li>
-            <div class="date">
-                <div class="month">
-                    @course.DateTime.ToString("MM")
+        if (course.IsCanceled == false)
+        {
+            <li>
+                <div class="date">
+                    <div class="month">
+                        @course.DateTime.ToString("MM")
+                    </div>
+                    <div class="day">
+                        @course.DateTime.ToString("dd")
+                    </div>
                 </div>
-                <div class="day">
-                    @course.DateTime.ToString("dd")
-                </div>
-            </div>
-            <div class="details">
-                <span class="lecturer">
-                    @course.ApplicationUser.Name
-                </span>
+                <div class="details">
+                    <span class="lecturer">
+                        @course.ApplicationUser.Name
+                    </span>
                     @if (Model.ShowAction)
                     {
-                        
-                            <button data-user-id="@course.IdLecturer" class="btn btn-success btn-sm js-togegle-follow">Following</button>
-                        
+
+                        <button data-user-id="@course.IdLecturer" class="btn btn-success btn-sm js-togegle-follow">Following</button>
+
                     }
 
-             <br />   
-            <span class="category">
-                @course.Category.Name
-            </span>
+                    <br />
+                    <span class="category">
+                        @course.Category.Name
+                    </span>
                     @if (Model.ShowAction)
                     {
                         if (course.isShowGoing)
@@ -46,9 +48,11 @@
                         }
 
                     }
-               
-            </div>
-        </li>
+
+                </div>
+            </li>
+        }
+
 
     }
 </ul>
